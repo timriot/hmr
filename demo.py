@@ -121,7 +121,10 @@ def preprocess_image(img_path, json_path=None):
 
 
 def main(img_path, json_path=None):
-    sess = tf.Session()
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth=True
+    sess = tf.Session(config=config)
+    #sess = tf.Session()
     model = RunModel(config, sess=sess)
 
     input_img, proc_param, img = preprocess_image(img_path, json_path)
